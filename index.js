@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const cors = require("cors");
 //Routes
 const authRoute = require("./routes/auth");
 
@@ -23,6 +24,7 @@ connectDatabase();
 
 //Middleware
 app.use(express.json());
+app.use(cors({ credentials: true, origin: true, exposedHeaders: "*" }));
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
