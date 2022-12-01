@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 //Routes
 const authRoute = require("./routes/auth");
+const userDetailsRoute = require("./routes/userDetails");
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use(function (req, res, next) {
 
 //Route Middleware
 app.use("/user", authRoute);
+app.use("/dashboard", userDetailsRoute);
 
 app.listen(5001, () => {
   console.log("running");

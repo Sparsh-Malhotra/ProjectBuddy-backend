@@ -2,7 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
-const { registerValidation, loginValidation } = require("../validation");
+const { registerValidation, loginValidation } = require("../utils/validation");
 
 router.post("/register", async (req, res) => {
   //Body Validation
@@ -11,7 +11,6 @@ router.post("/register", async (req, res) => {
     return res
       .status(400)
       .send({ message: "error", errorDetails: error.details[0].message });
-  if (error) return res.status(400).send();
 
   //Check if user email already exists
   const emailExist = await User.findOne({ email: req.body.email });
@@ -30,7 +29,8 @@ router.post("/register", async (req, res) => {
   });
   try {
     const savedUser = await user.save();
-    res.send(savedUser);
+    const token = jwt.sign({ _id: savedUser._id }, process.env.JWT_SECRET_KEY);
+    res.send({ ...savedUser, authToken: token });
   } catch (err) {
     res.status(400).send(err);
   }
