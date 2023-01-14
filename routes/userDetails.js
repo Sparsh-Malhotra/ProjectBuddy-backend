@@ -58,18 +58,44 @@ router.get("/get-buddies", verifyToken, async (req, res) => {
     customLabels: myCustomLabels,
   };
 
+  const paramsTest = {};
+  if (searchString)
+    paramsTest["firstName"] = {
+      $regex: new RegExp(searchString, "i"),
+    };
+
+  if (techStack)
+    paramsTest["techStack"] = {
+      $regex: new RegExp(techStack, "i"),
+    };
+
+  if (location)
+    paramsTest["state"] = {
+      $regex: new RegExp(location, "i"),
+    };
+
+  if (skill)
+    paramsTest["skills"] = {
+      $elemMatch: { $regex: new RegExp(skill, "i") },
+    };
+
   let myAggregate;
   if (filters.length > 0) {
     myAggregate = UserDetails.aggregate([
       {
         $match: {
-          $text: {
-            $search: `${filters.map((ele) => {
-              return ele.key === "searchString"
-                ? `${ele.value}^3 `
-                : `${ele.value}`;
-            })}`,
-          },
+          $and: [
+            {
+              $text: {
+                $search: `${filters.map((ele) => {
+                  return ele.key === "searchString"
+                    ? `${ele.value}^3 `
+                    : `${ele.value}`;
+                })}`,
+              },
+            },
+            paramsTest,
+          ],
         },
       },
     ]);
