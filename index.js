@@ -6,6 +6,7 @@ const cors = require("cors");
 //Routes
 const authRoute = require("./routes/auth");
 const userDetailsRoute = require("./routes/userDetails");
+const consoleRoute = require("./routes/console");
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ app.use(function (req, res, next) {
 //Route Middleware
 app.use("/user", authRoute);
 app.use("/dashboard", userDetailsRoute);
+app.use("/console", consoleRoute);
 
 app.listen(5001, () => {
   console.log("running");
