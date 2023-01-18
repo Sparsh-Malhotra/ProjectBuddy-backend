@@ -22,10 +22,14 @@ router.post("/register", async (req, res) => {
   //Hashing the password
   const hashedPassword = await hashPassword(req.body.password);
 
+  const name = req.body.name.split(" ");
   const user = new User({
     name: req.body.name,
     email: req.body.email,
     password: hashedPassword,
+    avatar_url: `https://api.dicebear.com/5.x/initials/svg?seed=${name.join(
+      "+"
+    )}?size=140?backgroundType=gradientLinear`,
   });
   try {
     const savedUser = await user.save();

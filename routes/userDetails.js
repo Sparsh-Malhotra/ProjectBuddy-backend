@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const UserDetails = require("../models/UserDetails");
+const User = require("../models/User");
 const verifyToken = require("../utils/verifyToken");
 const { userDetailsValidation } = require("../utils/validation");
 
@@ -27,7 +28,20 @@ router.get("/get-details", verifyToken, async (req, res) => {
       .status(400)
       .send({ message: "error", errorDetails: "Email does not exist" });
 
-  res.send({ message: "Success", data: details });
+  const avatar_url = await User.findOne(
+    { _id: req.user._id },
+    { avatar_url: 1, _id: 0 }
+  );
+
+  if (!details || !avatar_url)
+    return res
+      .status(400)
+      .send({ message: "error", errorDetails: "Email does not exist" });
+
+  res.send({
+    message: "Success",
+    data: { ...details._doc, ...avatar_url._doc },
+  });
 });
 
 router.get("/get-buddies", verifyToken, async (req, res) => {
