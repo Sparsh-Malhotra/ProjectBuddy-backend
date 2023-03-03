@@ -47,7 +47,7 @@ router.get("/get-details", verifyToken, async (req, res) => {
 router.get("/get-buddies", verifyToken, async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
 
-  const { searchString, techStack, location, skill } = req.query;
+  const { searchString, techStack, location, skill, userId } = req.query;
 
   const filters = [];
   if (searchString) filters.push({ key: "searchString", value: searchString });
@@ -99,6 +99,7 @@ router.get("/get-buddies", verifyToken, async (req, res) => {
       {
         $match: {
           $and: [
+            { 'userId': { '$nin': [userId] } },
             {
               $text: {
                 $search: `${filters.map((ele) => {
