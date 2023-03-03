@@ -99,7 +99,7 @@ router.get("/get-buddies", verifyToken, async (req, res) => {
       {
         $match: {
           $and: [
-            { 'userId': { '$nin': [userId] } },
+            { userId: { $ne: userId } },
             {
               $text: {
                 $search: `${filters.map((ele) => {
@@ -115,7 +115,11 @@ router.get("/get-buddies", verifyToken, async (req, res) => {
       },
     ]);
   } else {
-    myAggregate = UserDetails.aggregate();
+    myAggregate = UserDetails.aggregate([
+      {
+        $match: { userId: { $ne: userId } },
+      },
+    ]);
   }
 
   UserDetails.aggregatePaginate(myAggregate, options, function (err, result) {
