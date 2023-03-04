@@ -1,6 +1,6 @@
-import User from "../models/User";
-import UserDetails from "../models/UserDetails";
-import { userDetailsValidation } from "../utils/validation";
+import User from "../models/User.js";
+import UserDetails from "../models/UserDetails.js";
+import { userDetailsValidation } from "../utils/validation.js";
 
 export const submitDetails = async (req, res) => {
   //   res.send(req.user);

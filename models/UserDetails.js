@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const aggregatePaginate = require("mongoose-aggregate-paginate-v2");
+import mongoose from "mongoose";
+import aggregatePaginate from "mongoose-aggregate-paginate-v2";
 
 const userDetailsSchema = new mongoose.Schema({
   firstName: {
@@ -86,4 +86,6 @@ const userDetailsSchema = new mongoose.Schema({
 
 userDetailsSchema.plugin(aggregatePaginate);
 
-module.exports = mongoose.model("UserDetails", userDetailsSchema);
+const UserDetails = mongoose.model("UserDetails", userDetailsSchema);
+
+export default UserDetails

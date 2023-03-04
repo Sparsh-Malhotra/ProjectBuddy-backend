@@ -1,4 +1,4 @@
-import UserDetails from "../models/UserDetails";
+import UserDetails from "../models/UserDetails.js";
 
 export const getHome = async (req, res) => {
   const categoryInfo = {
