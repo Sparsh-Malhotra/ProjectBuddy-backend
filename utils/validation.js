@@ -1,6 +1,6 @@
-const joi = require("joi");
+import joi from 'joi';
 
-const registerValidation = (data) => {
+export const registerValidation = (data) => {
   const schema = joi.object({
     name: joi.string().min(3).required(),
     email: joi.string().min(6).required().email(),
@@ -9,7 +9,7 @@ const registerValidation = (data) => {
   return schema.validate(data);
 };
 
-const loginValidation = (data) => {
+export const loginValidation = (data) => {
   const schema = joi.object({
     email: joi.string().min(6).required().email(),
     password: joi.string().min(6).required(),
@@ -17,7 +17,7 @@ const loginValidation = (data) => {
   return schema.validate(data);
 };
 
-const userDetailsValidation = (data) => {
+export const userDetailsValidation = (data) => {
   const schema = joi.object({
     firstName: joi.string().min(3).required(),
     lastName: joi.string().min(3).required(),
@@ -36,6 +36,3 @@ const userDetailsValidation = (data) => {
   return schema.validate(data);
 };
 
-module.exports.registerValidation = registerValidation;
-module.exports.loginValidation = loginValidation;
-module.exports.userDetailsValidation = userDetailsValidation;

@@ -1,13 +1,18 @@
-const express = require("express");
-const app = express();
-const dotenv = require("dotenv");
-const mongoose = require("mongoose");
-const cors = require("cors");
-//Routes
-const authRoute = require("./routes/auth");
-const userDetailsRoute = require("./routes/userDetails");
-const consoleRoute = require("./routes/console");
+import express from 'express';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose'
+import cors from 'cors'
 
+/////////////////
+// Routes
+/////////////////
+
+import authRoute from './routes/auth.js'
+import userDetailsRoute from './routes/userDetails.js'
+import consoleRoute from './routes/console.js'
+
+
+const app = express();
 dotenv.config();
 
 //DB Connection
