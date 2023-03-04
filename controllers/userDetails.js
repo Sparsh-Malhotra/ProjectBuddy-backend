@@ -135,7 +135,7 @@ export const getBuddies = async (req, res) => {
 export const getBuddyById = async (req, res) => {
   try {
     const { buddyId } = req.params;
-    const user = await User.findById(buddyId);
+    const user = await UserDetails.findOne({ userId: buddyId });
     if (!user) {
       return res
         .status(404)
