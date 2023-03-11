@@ -78,6 +78,15 @@ const userDetailsSchema = new mongoose.Schema({
     min: 3,
     max: 255,
   },
+  about: {
+    type: String,
+    required: true,
+  },
+  caregory: {
+    type: String,
+    required: true,
+    enum: ["student", "professional"],
+  },
   userId: {
     type: String,
     required: true,
@@ -88,4 +97,4 @@ userDetailsSchema.plugin(aggregatePaginate);
 
 const UserDetails = mongoose.model("UserDetails", userDetailsSchema);
 
-export default UserDetails
+export default UserDetails;

@@ -3,7 +3,6 @@ import UserDetails from "../models/UserDetails.js";
 import { userDetailsValidation } from "../utils/validation.js";
 
 export const submitDetails = async (req, res) => {
-  //   res.send(req.user);
   const { error } = userDetailsValidation(req.body);
   if (error)
     return res
