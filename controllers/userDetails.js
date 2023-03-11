@@ -18,6 +18,22 @@ export const submitDetails = async (req, res) => {
   }
 };
 
+export const updateDetails = async (req, res) => {
+  const { id } = req.params;
+  const requestBody = req.body;
+
+  try {
+    UserDetails.updateOne({ userId: id }, { ...requestBody }, (err, docs) => {
+      if (err) res.status(400).send(err);
+      else {
+        res.send({ message: "Success" });
+      }
+    });
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
+
 export const getDetails = async (req, res) => {
   const details = await UserDetails.findOne({ userId: req.user._id });
   if (!details)
