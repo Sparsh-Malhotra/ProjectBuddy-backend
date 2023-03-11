@@ -82,7 +82,7 @@ const userDetailsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  caregory: {
+  category: {
     type: String,
     required: true,
     enum: ["student", "professional"],

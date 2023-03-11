@@ -32,6 +32,8 @@ export const userDetailsValidation = (data) => {
     github: joi.string().uri(),
     twitter: joi.string().uri(),
     dribble: joi.string().uri(),
+    category: joi.string().valid("student", "professional"),
+    about: joi.string(),
   });
   return schema.validate(data);
 };
