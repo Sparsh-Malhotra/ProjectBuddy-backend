@@ -46,7 +46,7 @@ const userDetailsSchema = new mongoose.Schema({
   techStack: {
     type: String,
     required: true,
-    min: 3,
+    min: 2,
     max: 255,
   },
   skills: {
