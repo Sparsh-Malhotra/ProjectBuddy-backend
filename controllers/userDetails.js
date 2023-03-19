@@ -151,12 +151,19 @@ export const getBuddyById = async (req, res) => {
   try {
     const { buddyId } = req.params;
     const user = await UserDetails.findOne({ userId: buddyId });
-    if (!user) {
+    const avatar_url = await User.findOne(
+      { _id: buddyId },
+      { avatar_url: 1, _id: 0 }
+    );
+    if (!user || !avatar_url) {
       return res
         .status(404)
         .json({ msg: "Can't find user, please check the id!!" });
     }
-    res.status(200).json(user);
+    res.send({
+      message: "Success",
+      data: { ...user._doc, ...avatar_url._doc },
+    });
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
