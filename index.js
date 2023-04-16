@@ -1,16 +1,17 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import mongoose from 'mongoose'
-import cors from 'cors'
+import express from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import cors from "cors";
 
 /////////////////
 // Routes
 /////////////////
 
-import authRoute from './routes/auth.js'
-import userDetailsRoute from './routes/userDetails.js'
-import consoleRoute from './routes/console.js'
-
+import authRoute from "./routes/auth.js";
+import userDetailsRoute from "./routes/userDetails.js";
+import consoleRoute from "./routes/console.js";
+import chatRoute from "./routes/chat.js";
+import messageRoute from "./routes/message.js";
 
 const app = express();
 dotenv.config();
@@ -53,6 +54,8 @@ app.use(function (req, res, next) {
 app.use("/user", authRoute);
 app.use("/dashboard", userDetailsRoute);
 app.use("/console", consoleRoute);
+app.use("/chat", chatRoute);
+app.use("/message", messageRoute);
 
 app.listen(5001, () => {
   console.log("running");

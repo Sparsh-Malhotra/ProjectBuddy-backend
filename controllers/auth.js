@@ -47,7 +47,7 @@ export const login = async (req, res) => {
         .status(400)
         .send({ message: "error", errorDetails: error.details[0].message });
   
-    //Check if user email already exists
+    //Check if user email does not exists
     const user = await User.findOne({ email: req.body.email });
     if (!user)
       return res
